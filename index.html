@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的定制导航 | 暖米色护眼风格</title>
+    <style>
+        /* 1. 全局基础 - 暖米色护眼+苹果规范 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        body {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, "微软雅黑", sans-serif;
+            line-height: 1.7;
+            /* 核心：暖米色主背景（护眼不刺眼） */
+            background-color: #f9f7f2;
+            /* 暖调深灰文字，替代纯黑 */
+            color: #433e33;
+            scroll-behavior: smooth;
+        }
+
+        /* 2. 头部 - 暖米色配色+苹果留白 */
+        header {
+            text-align: center;
+            padding: 48px 0 32px;
+            /* 暖调浅棕分割线，柔和统一 */
+            border-bottom: 1px solid #e8e2d4;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #3a362d; /* 更深的暖棕标题 */
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+        }
+        header p {
+            /* 暖调浅棕次要文字 */
+            color: #7a705d;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        /* 3. 内容布局 - 苹果式留白 */
+        .content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* 4. 导航区 - 暖米色+苹果控件质感 */
+        .download-links {
+            /* 奶油白卡片背景，比主背景稍亮 */
+            background-color: #fcfaf6;
+            border-radius: 20px;
+            padding: 24px;
+            /* 暖调轻阴影，无硬边 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0e9d8;
+        }
+        .download-links a {
+            display: block;
+            padding: 14px 18px;
+            margin: 6px 0;
+            /* 暖调焦糖绿链接色，护眼且适配米色 */
+            color: #8a9a5b;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 14px;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        }
+        /* hover：暖米色背景+微上移 */
+        .download-links a:hover {
+            background-color: #f2eedc;
+            color: #79884e; /* 略深的焦糖绿 */
+            transform: translateY(-1px);
+        }
+        /* active：按压感+更深的暖米色 */
+        .download-links a:active {
+            transform: translateY(0);
+            background-color: #ebe5d0;
+        }
+        /* 推荐链接：暖焦糖绿底色 */
+        .download-links a:first-child {
+            background-color: #8a9a5b;
+            color: #ffffff;
+        }
+        .download-links a:first-child:hover {
+            background-color: #79884e;
+            transform: translateY(-1px);
+        }
+
+        /* 5. 内容区 - 暖米色+苹果排版 */
+        .text-content {
+            background-color: #fcfaf6;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0e9d8;
+        }
+        .text-content h2 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #3a362d;
+            border-bottom: 1px solid #e8e2d4;
+            padding-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        .text-content p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            /* 暖调浅棕正文次要色 */
+            color: #5c5548;
+        }
+        .text-content img {
+            max-width: 100%;
+            border-radius: 16px;
+            margin: 24px 0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: opacity 0.3s ease;
+        }
+        .text-content img:hover {
+            opacity: 0.98;
+        }
+
+        /* 6. 页脚 - 暖米色+苹果简洁 */
+        footer {
+            text-align: center;
+            color: #7a705d;
+            margin-top: 80px;
+            padding-top: 32px;
+            border-top: 1px solid #e8e2d4;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* 7. 响应式 - 适配移动端 */
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .download-links, .text-content {
+                padding: 20px;
+                border-radius: 16px;
+            }
+            .text-content h2 {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* 8. 深色模式（暖米色护眼版） */
+        @media (prefers-color-scheme: dark) {
+            body {
+                /* 深色暖调护眼背景：深卡其灰 */
+                background-color: #2b2822;
+                color: #e9e4d8;
+            }
+            header h1, .text-content h2 {
+                color: #f9f7f2;
+            }
+            header p, footer {
+                color: #b8b09e;
+            }
+            .download-links, .text-content {
+                background-color: #36332c;
+                border-color: #444036;
+            }
+            .download-links a {
+                color: #a8b878;
+            }
+            .download-links a:hover {
+                background-color: #403c34;
+            }
+            .download-links a:first-child {
+                background-color: #98a868;
+            }
+            .text-content p {
+                color: #d9d2c4;
+            }
+            header, .text-content h2, footer {
+                border-color: #444036;
+            }
+        }
+    </style>
+</head>
+<body>                            
+    <header>
+        <h1>我的定制导航</h1>
+        <p></p>
+    </header>
+
+    <div class="content">
+        <div class="download-links">
+            <a href="https://pc.weixin.qq.com/" target="_blank">微信下载 ✨</a>
+            <a href="https://work.weixin.qq.com/#indexDownload" target="_blank">企业微信下载</a>
+            <a href="https://www.wps.cn/" target="_blank">WPS下载</a><p>WPS下载选更多下载，然后选择windows版（64位）</p>
+            <a href="https://im.qq.com/index/#/" target="_blank">QQ下载</a>
+            <a href="https://www.huorong.cn/person" target="_blank">火绒安全软件下载</a>
+            <a href="https://www.doubao.com/" target="_blank">豆包下载</a>
+            <a href="https://tsbrowser.xiangtatech.com/" target="_blank">极速浏览器下载</a>
+            <a href="https://wubi.sogou.com/" target="_blank">搜狗五笔拼音输入法下载</a>
+        </div>
+
+        <div class="text-content">
+            <h2>关于我</h2>
+            <p>这是我用 GitHub Pages 免费搭建的简易网站，无需编程基础，全程免费！</p>
+            <p></p>
+            
+            <img src="https://imgchr.com/i/Z9t88R" alt="示例图片" />
+            
+            <h2>联系方式</h2>
+            <p>邮箱：191067205@qq.com</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 MYPAGE · 暖米色护眼风格定制</p>
+        <p>暖调护眼，舒适体验 —— Apple Design × 米色暖调</p>
+    </footer>
+</body>
+</html>
