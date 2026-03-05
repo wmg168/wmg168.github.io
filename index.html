@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的定制导航 | 暖米色护眼风格</title>
     <style>
-        /* 1. 全局基础 - 暖米色护眼+苹果规范 */
+        /* 1. 全局基础 - 暖米色护眼+苹果规范（宽度保持不变） */
         * {
             margin: 0;
             padding: 0;
@@ -14,97 +14,160 @@
             user-select: none;
         }
         body {
-            max-width: 900px;
+            max-width: 1200px; /* 全局宽度保持上一版不变 */
             margin: 0 auto;
-            padding: 32px 24px;
+            padding: 0 24px; /* 页面置顶 */
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, "微软雅黑", sans-serif;
             line-height: 1.7;
-            /* 核心：暖米色主背景（护眼不刺眼） */
-            background-color: #f9f7f2;
-            /* 暖调深灰文字，替代纯黑 */
-            color: #433e33;
+            background-color: #f9f7f2; /* 暖米色主背景 */
+            color: #433e33; /* 暖调深灰文字 */
             scroll-behavior: smooth;
         }
 
-        /* 2. 头部 - 暖米色配色+苹果留白 */
+        /* 2. 头部 - 宽度/样式保持不变（标题、搜索框、分割线） */
         header {
             text-align: center;
-            padding: 48px 0 32px;
-            /* 暖调浅棕分割线，柔和统一 */
+            padding: 32px 0 32px; 
             border-bottom: 1px solid #e8e2d4;
-            margin-bottom: 40px;
+            margin-bottom: 24px; 
+            max-width: 100%; /* 头部宽度保持不变 */
+            margin-left: auto;
+            margin-right: auto;
         }
         header h1 {
             font-size: 2.5rem;
             font-weight: 500;
             color: #3a362d; /* 更深的暖棕标题 */
             letter-spacing: -0.03em;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        /* 搜索框容器（宽度保持不变） */
+        .search-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            max-width: 500px; /* 搜索框宽度保持不变 */
+            margin: 0 auto 12px;
+        }
+        /* 搜索输入框 */
+        .search-input {
+            flex: 1;
+            height: 44px;
+            padding: 0 16px;
+            border: 1px solid #f0e9d8;
+            border-radius: 22px;
+            background-color: #fcfaf6;
+            font-size: 1rem;
+            color: #433e33;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        .search-input:focus {
+            border-color: #8a9a5b;
+            box-shadow: 0 0 0 2px rgba(138, 154, 91, 0.1);
+        }
+        /* 搜索按钮（样式保持不变） */
+        .search-btn {
+            height: 44px;
+            padding: 0 24px;
+            border: none;
+            border-radius: 22px;
+            background-color: #8a9a5b;
+            color: #ffffff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .search-btn:hover {
+            background-color: #79884e;
+            transform: translateY(-1px);
+        }
+        .search-btn:active {
+            transform: translateY(0);
+            background-color: #6a7841;
         }
         header p {
-            /* 暖调浅棕次要文字 */
-            color: #7a705d;
+            color: #7a705d; /* 暖调浅棕次要文字 */
             font-size: 1.1rem;
             font-weight: 400;
         }
 
-        /* 3. 内容布局 - 苹果式留白 */
-        .content {
+        /* 3. 总布局容器 - 仅修改为一行四列，其他不变 */
+        .main-container {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 40px;
-            align-items: start;
+            grid-template-columns: repeat(4, 1fr); /* 强制一行四列布局 */
+            gap: 12px; 
+            margin-bottom: 24px;
+            max-width: 100%; /* 总容器宽度保持不变 */
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* 4. 导航区 - 暖米色+苹果控件质感 */
-        .download-links {
-            /* 奶油白卡片背景，比主背景稍亮 */
-            background-color: #fcfaf6;
+        /* 4. 导航模块通用样式 - 仅调整适配四列，其他不变 */
+        .nav-card {
+            background-color: #fcfaf6; /* 奶油白卡片 */
             border-radius: 20px;
             padding: 24px;
-            /* 暖调轻阴影，无硬边 */
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
             border: 1px solid #f0e9d8;
+            width: 100%; /* 自适应四列宽度 */
         }
-        .download-links a {
+        /* 导航分组标题 */
+        .nav-title {
+            font-size: 1rem;
+            color: #7a705d;
+            margin: 0 0 12px 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #f0e9d8;
+        }
+        /* 导航链接样式 - 高度增大5%（保持不变） */
+        .nav-card a {
             display: block;
-            padding: 14px 18px;
+            padding: calc(14px * 1.05) 18px;
             margin: 6px 0;
-            /* 暖调焦糖绿链接色，护眼且适配米色 */
-            color: #8a9a5b;
+            color: #8a9a5b; /* 焦糖绿链接色 */
             text-decoration: none;
             font-size: 1rem;
             border-radius: 14px;
-            transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+            transition: all 0.2s ease;
+            line-height: 1.7; /* 保证文字垂直居中 */
         }
-        /* hover：暖米色背景+微上移 */
-        .download-links a:hover {
+        .nav-card a:hover {
             background-color: #f2eedc;
-            color: #79884e; /* 略深的焦糖绿 */
+            color: #79884e;
             transform: translateY(-1px);
         }
-        /* active：按压感+更深的暖米色 */
-        .download-links a:active {
+        .nav-card a:active {
             transform: translateY(0);
             background-color: #ebe5d0;
         }
-        /* 推荐链接：暖焦糖绿底色 */
-        .download-links a:first-child {
+        /* 推荐链接样式 */
+        .nav-card a.recommend {
             background-color: #8a9a5b;
             color: #ffffff;
         }
-        .download-links a:first-child:hover {
+        .nav-card a.recommend:hover {
             background-color: #79884e;
-            transform: translateY(-1px);
+        }
+        /* 链接备注文字 */
+        .link-note {
+            font-size: 0.85rem;
+            color: #7a705d;
+            margin: -2px 0 8px 20px;
         }
 
-        /* 5. 内容区 - 暖米色+苹果排版 */
+        /* 5. 内容区样式（宽度保持不变） */
         .text-content {
             background-color: #fcfaf6;
             border-radius: 20px;
             padding: 32px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
             border: 1px solid #f0e9d8;
+            margin-top: 12px;
+            max-width: 100%; /* 内容区宽度保持不变 */
+            margin-left: auto;
+            margin-right: auto;
         }
         .text-content h2 {
             font-size: 1.6rem;
@@ -118,7 +181,6 @@
         .text-content p {
             margin-bottom: 20px;
             font-size: 1.05rem;
-            /* 暖调浅棕正文次要色 */
             color: #5c5548;
         }
         .text-content img {
@@ -127,64 +189,88 @@
             margin: 24px 0;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
             transition: opacity 0.3s ease;
+            /* 图片加载失败兜底 */
+            object-fit: cover;
+            min-height: 100px;
+            background-color: #f2eedc;
         }
         .text-content img:hover {
             opacity: 0.98;
         }
 
-        /* 6. 页脚 - 暖米色+苹果简洁 */
+        /* 6. 页脚样式（宽度保持不变） */
         footer {
             text-align: center;
             color: #7a705d;
-            margin-top: 80px;
-            padding-top: 32px;
+            margin-top: 40px; 
+            padding: 32px 0; 
             border-top: 1px solid #e8e2d4;
             font-size: 0.95rem;
             line-height: 1.8;
+            max-width: 100%; /* 页脚宽度保持不变 */
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* 7. 响应式 - 适配移动端 */
+        /* 7. 响应式适配 - 移动端自动改为单列 */
         @media (max-width: 768px) {
-            .content {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
             header h1 {
                 font-size: 2rem;
             }
-            .download-links, .text-content {
+            .nav-card, .text-content {
                 padding: 20px;
                 border-radius: 16px;
             }
             .text-content h2 {
                 font-size: 1.4rem;
             }
+            .main-container {
+                grid-template-columns: 1fr; /* 移动端单列显示 */
+                gap: 10px; 
+            }
+            /* 移动端搜索框适配（保持不变） */
+            .search-box {
+                padding: 0 16px;
+                gap: 6px;
+                max-width: 90%;
+            }
+            .search-input {
+                height: 40px;
+                font-size: 0.95rem;
+            }
+            .search-btn {
+                height: 40px;
+                padding: 0 18px;
+                font-size: 0.95rem;
+            }
+            .nav-card a {
+                padding: calc(14px * 1.05) 18px;
+            }
         }
 
-        /* 8. 深色模式（暖米色护眼版） */
+        /* 8. 深色模式（保持不变） */
         @media (prefers-color-scheme: dark) {
             body {
-                /* 深色暖调护眼背景：深卡其灰 */
                 background-color: #2b2822;
                 color: #e9e4d8;
             }
             header h1, .text-content h2 {
                 color: #f9f7f2;
             }
-            header p, footer {
+            header p, footer, .nav-title, .link-note {
                 color: #b8b09e;
             }
-            .download-links, .text-content {
+            .nav-card, .text-content {
                 background-color: #36332c;
                 border-color: #444036;
             }
-            .download-links a {
+            .nav-card a {
                 color: #a8b878;
             }
-            .download-links a:hover {
+            .nav-card a:hover {
                 background-color: #403c34;
             }
-            .download-links a:first-child {
+            .nav-card a.recommend {
                 background-color: #98a868;
             }
             .text-content p {
@@ -193,42 +279,122 @@
             header, .text-content h2, footer {
                 border-color: #444036;
             }
+            .text-content img {
+                background-color: #403c34;
+            }
+            /* 深色模式搜索框样式 */
+            .search-input {
+                background-color: #36332c;
+                border-color: #444036;
+                color: #e9e4d8;
+            }
+            .search-input:focus {
+                border-color: #98a868;
+                box-shadow: 0 0 0 2px rgba(152, 168, 104, 0.1);
+            }
+            .search-btn {
+                background-color: #98a868;
+            }
+            .search-btn:hover {
+                background-color: #a8b878;
+            }
+            .search-btn:active {
+                background-color: #889858;
+            }
         }
     </style>
 </head>
 <body>                            
     <header>
         <h1>我的定制导航</h1>
-        <p></p>
+        <!-- 搜索框及按钮（保持不变） -->
+        <div class="search-box">
+            <input type="text" class="search-input" id="baidu-search" placeholder="请输入搜索内容...">
+            <button class="search-btn" onclick="baiduSearch()">百度一下</button>
+        </div>
+        <p>专属导航·定制不凡·予尔所需·一路同行</p>
     </header>
 
-    <div class="content">
-        <div class="download-links">
-            <a href="https://pc.weixin.qq.com/" target="_blank">微信下载 ✨</a>
+    <!-- 总布局容器：强制一行四列 -->
+    <div class="main-container">
+        <!-- 导航1：软件下载 -->
+        <div class="nav-card">
+            <p class="nav-title">---常用软件下载---</p>
+            <a href="https://pc.weixin.qq.com/" target="_blank" class="recommend">微信下载 ✨</a>
             <a href="https://work.weixin.qq.com/#indexDownload" target="_blank">企业微信下载</a>
-            <a href="https://www.wps.cn/" target="_blank">WPS下载</a><p>WPS下载选更多下载，然后选择windows版（64位）</p>
+            <a href="https://www.wps.cn/" target="_blank">WPS下载</a>
+            <p class="link-note">选更多下载 → windows版（64位）</p>
             <a href="https://im.qq.com/index/#/" target="_blank">QQ下载</a>
             <a href="https://www.huorong.cn/person" target="_blank">火绒安全软件下载</a>
-            <a href="https://www.doubao.com/" target="_blank">豆包下载</a>
+            <a href="https://www.dingtalk.com/" target="_blank">钉钉下载</a>
             <a href="https://tsbrowser.xiangtatech.com/" target="_blank">极速浏览器下载</a>
             <a href="https://wubi.sogou.com/" target="_blank">搜狗五笔拼音输入法下载</a>
         </div>
 
-        <div class="text-content">
-            <h2>关于我</h2>
-            <p>这是我用 GitHub Pages 免费搭建的简易网站，无需编程基础，全程免费！</p>
-            <p></p>
-            
-            <img src="https://imgchr.com/i/Z9t88R" alt="示例图片" />
-            
-            <h2>联系方式</h2>
-            <p>邮箱：191067205@qq.com</p>
+        <!-- 导航2：AI工具 -->
+        <div class="nav-card">
+            <p class="nav-title">---AI生产工具---</p>
+            <a href="https://www.deepseek.com/" target="_blank" class="recommend">deepseek-深度求索</a>
+            <a href="https://www.doubao.com/" target="_blank">豆包-字节跳动</a>
+            <a href="https://yuanbao.tencent.com/chat/naQivTmsDa" target="_blank">元宝-腾讯</a>
+            <a href="https://www.qianwen.com/" target="_blank">千问-阿里</a>
+            <a href="https://www.kimi.com/" target="_blank">KIMI-月之暗面</a>
+            <a href="https://yiyan.baidu.com/" target="_blank">文心一言-百度</a>
+            <a href="https://jimeng.jianying.com/" target="_blank">即梦AI</a>
         </div>
+
+        <!-- 导航3：视频网站 -->
+        <div class="nav-card">
+            <p class="nav-title">---常用视频网站---</p>
+            <a href="https://www.bilibili.com/" target="_blank" class="recommend">哔哩哔哩</a>
+            <a href="https://www.douyin.com/" target="_blank">抖音</a>
+            <a href="https://www.iqiyi.com/" target="_blank">爱奇艺</a>
+            <a href="https://v.qq.com/" target="_blank">腾讯视频</a>
+            <a href="https://www.youku.com/ku/webhome" target="_blank">优酷视频</a>
+            <a href="https://tv.cctv.com/" target="_blank">央视频</a>
+            <a href="https://tv.sohu.com/" target="_blank">搜狐视频</a>
+        </div>
+
+<!-- 导航4：网购平台 -->
+        <div class="nav-card">
+            <p class="nav-title">---网购平台---</p>
+            <a href="https://www.jd.com/" target="_blank" class="recommend">京东</a>
+            <a href="https://www.tmall.com/" target="_blank">天猫</a>
+            <a href="https://www.taobao.com/" target="_blank">淘宝</a>
+            <a href="https://www.baidu.com/" target="_blank" >百度一下</a>
+        </div>
+    </div>
+    <!-- 内容区：关于我 + 联系方式 -->
+    <div class="text-content">
+        <h2>给你不一样的风景</h2>
+        <p>每一次风景都是不期而遇，欣赏当下，留住当下。刷新过后，另起新篇！</p>
+        <!-- 兜底图改为1920*1080壁纸级世界奇观景致 -->
+        <img src="https://imgchr.com/i/Z9t88R" alt="示例图片" onerror="this.src='https://picsum.photos/1920/1080?query=world%20wonder%20scenery&color=e8e2d4%20natural+scenery%20aurora%20grand+canyon%20great+barrier+reef%20norway+fjord'" />
+        <h2>联系方式</h2>
+        <a href="https://mail.qq.com/" target="_blank">邮箱：191067205@qq.com</a>
     </div>
 
     <footer>
-        <p>© 2026 MYPAGE · 暖米色护眼风格定制</p>
-        <p>暖调护眼，舒适体验 —— Apple Design × 米色暖调</p>
+        <p>© 2026 MYPAGE · 暖米色护眼风格</p>
+        <p>暖调护眼，舒适体验 —— Design By Gwm 米色暖调</p>
     </footer>
+
+    <!-- 百度搜索功能脚本（保持不变） -->
+    <script>
+        function baiduSearch() {
+            const searchText = document.getElementById('baidu-search').value.trim();
+            if (searchText) {
+                const searchUrl = `https://www.baidu.com/s?wd=${encodeURIComponent(searchText)}`;
+                window.open(searchUrl, '_blank');
+            } else {
+                alert('请输入搜索内容！');
+            }
+        }
+        document.getElementById('baidu-search').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                baiduSearch();
+            }
+        });
+    </script>
 </body>
 </html>
